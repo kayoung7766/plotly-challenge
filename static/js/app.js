@@ -8,8 +8,19 @@ d3.json("samples.json").then((importedData) => {
     let sample=  data.map(row => row.samples);
     console.log(sample);
 
-    let sampleValues = data.map(row=> row.samples["sample_values"]);
-    console.log(sampleValues)
+
+    let sampleValues = sample[0].map(row => row.sample_values);
+    console.log(sampleValues);
+
+    // let sampleValues6 = data.map(row => row.samples.sample_values);
+    // console.log(sampleValues6);
+
+    // function unpack (rows, index) {
+    //         return rows.map(function(row){
+    //             return row[index];
+    //         });
+    //     }
+    // let sample_values4 = unpack(data.samples, 2)
 });
 
     // function unpack (rows, index) {
