@@ -42,30 +42,32 @@ d3.json("samples.json").then((importedData) => {
     let otuLabels = sample[0].map(row =>row.otu_labels);
     console.log(otuLabels);
 
+    //creating bar chart
+
+    let trace1 = {
+        x: otuIds,
+        y: sampleValues,
+        type: "bar",
+        orientation: "h",
+    };
+
+    let traces = [trace1];
+
+    let layout = {
+        title: "Top 10 Microbial Species"
+    };
+
+    Plotly.newPlot("bar, traces, layout");
+
+
+
 });
 
-//     function process () {
-//         var dropdownMenu = d3.select("#selDataset");
-//         var targetId = dropdownMenu.property("value");
-//         console.log("id", targetId);
-    
-//         //loop for dropdown
-//         for (i=0; i<sampleId.length; i++) {
-//             var option = dropdownMenu.append('option');
-//             option.attr('value', sampleId[i]);
-//             option.text(sampleId[i]);
-//         };
-
-//         dropdownMenu.on("change", process);
-
-//     var targetId= dropdownMenu.property('value');
-//     };
 
 
 
     
     
-// });
 
 
 // });
