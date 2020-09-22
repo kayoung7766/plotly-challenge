@@ -1,4 +1,4 @@
-function process () {
+function process() {
     var dropdownMenu = d3.select("#selDataset");
     var targetId = dropdownMenu.property("value");
     console.log("id", targetId);
@@ -12,62 +12,86 @@ d3.json("samples.json").then((importedData) => {
 
     var dropdownMenu = d3.select("#selDataset");
 
-    let sampleId = data[0].names;
+    let sampleId = data.names;
     console.log(sampleId);
 
-            // loop for dropdown
-        for (i=0; i<sampleId.length; i++) {
-            var option = dropdownMenu.append('option');
-            option.attr('value', sampleId[i]);
-            option.text(sampleId[i]);
-        };
+    // loop for dropdown
+    for (i = 0; i < sampleId.length; i++) {
+        var option = dropdownMenu.append('option');
+        option.attr('value', sampleId[i]);
+        option.text(sampleId[i]);
+    };
 
-        dropdownMenu.on("change", process);
+    dropdownMenu.on("change", process);
 
-    var targetId= dropdownMenu.property('value');
+    var targetId = dropdownMenu.property('value');
 
-    
-    
-// pulling data for plots
-   
-    let sample=  data.map(row => row.samples);
+
+    //pulling data for plots
+
+    let sample = data.samples;
     console.log(sample);
 
-    let sampleValues = sample[0].map(row => row.sample_values);
+    let sampleValues = data.samples.sample_values;
     console.log(sampleValues);
 
-    let otuIds = sample[0].map(row =>row.otu_ids);
-    console.log(otuIds);
+    // let sample = data.map(row => row.samples);
+    // console.log(sample);
 
-    let otuLabels = sample[0].map(row =>row.otu_labels);
-    console.log(otuLabels);
+    // let sampleValues = sample[0].map(row => row.sample_values);
+    // console.log(sampleValues);
 
-    //creating bar chart
+    // let otuIds = sample[0].map(row => row.otu_ids);
+    // console.log(otuIds);
 
-    let trace1 = {
-        x: otuIds,
-        y: sampleValues,
-        type: "bar",
-        orientation: "h",
+    // let otuLabels = sample[0].map(row => row.otu_labels);
+    // console.log(otuLabels);
+
+    let id = d3.select("#selDataset").node().value;
+    console.log(id);
+
+    function buildPlot(id) {
+
+        let sample = data.map(row => row.samples);
+        console.log(sample);
+        let sampleValues = sample[0].map(row => row.sample_values);
+        console.log(sampleValues);
+
+        let otuIds = sample[0].map(row => row.otu_ids);
+        console.log(otuIds);
+
+        let otuLabels = sample[0].map(row => row.otu_labels);
+        console.log(otuLabels);
+
+
+
+        //creating bar chart
+
+        let trace1 = {
+            x: otuIds,
+            y: sampleValues,
+            type: "bar",
+            orientation: "h",
+        };
+
+        let traces = [trace1];
+
+        let layout = {
+            title: "Top 10 Microbial Species"
+        };
+
+        Plotly.newPlot("bar", traces, layout);
     };
 
-    let traces = [trace1];
-
-    let layout = {
-        title: "Top 10 Microbial Species"
-    };
-
-    Plotly.newPlot("bar, traces, layout");
 
 
-
-});
+    });
 
 
 
 
-    
-    
+
+
 
 
 // });
@@ -89,12 +113,4 @@ d3.json("samples.json").then((importedData) => {
     //     var dataset = dropdownMenu.property("value");
     //     console.log(dataset);
     // }
-
-
-
-
-
-
- 
-
 
