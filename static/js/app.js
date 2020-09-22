@@ -1,36 +1,73 @@
+function process () {
+    var dropdownMenu = d3.select("#selDataset");
+    var targetId = dropdownMenu.property("value");
+    console.log("id", targetId);
+};
+
 
 
 d3.json("samples.json").then((importedData) => {
     console.log(importedData);
     const data = importedData;
-    
 
+    var dropdownMenu = d3.select("#selDataset");
+
+    let sampleId = data[0].names;
+    console.log(sampleId);
+
+            // loop for dropdown
+        for (i=0; i<sampleId.length; i++) {
+            var option = dropdownMenu.append('option');
+            option.attr('value', sampleId[i]);
+            option.text(sampleId[i]);
+        };
+
+        dropdownMenu.on("change", process);
+
+    var targetId= dropdownMenu.property('value');
+
+    
+    
+// pulling data for plots
+   
     let sample=  data.map(row => row.samples);
     console.log(sample);
-
 
     let sampleValues = sample[0].map(row => row.sample_values);
     console.log(sampleValues);
 
-    // let sampleValues6 = data.map(row => row.samples.sample_values);
-    // console.log(sampleValues6);
+    let otuIds = sample[0].map(row =>row.otu_ids);
+    console.log(otuIds);
 
-    // function unpack (rows, index) {
-    //         return rows.map(function(row){
-    //             return row[index];
-    //         });
-    //     }
-    // let sample_values4 = unpack(data.samples, 2)
+    let otuLabels = sample[0].map(row =>row.otu_labels);
+    console.log(otuLabels);
+
 });
 
-    // function unpack (rows, index) {
-    //     return rows.map(function(row){
-    //         return row[index];
-    //     });
-    // }
+//     function process () {
+//         var dropdownMenu = d3.select("#selDataset");
+//         var targetId = dropdownMenu.property("value");
+//         console.log("id", targetId);
+    
+//         //loop for dropdown
+//         for (i=0; i<sampleId.length; i++) {
+//             var option = dropdownMenu.append('option');
+//             option.attr('value', sampleId[i]);
+//             option.text(sampleId[i]);
+//         };
 
-    // let sample_values = unpack(data.names);
-    // console.log(sample_values);
+//         dropdownMenu.on("change", process);
+
+//     var targetId= dropdownMenu.property('value');
+//     };
+
+
+
+    
+    
+// });
+
+
 // });
     // let trace1 = {
     //     x : 
