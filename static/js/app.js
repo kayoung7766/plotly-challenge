@@ -22,12 +22,13 @@ d3.json("samples.json").then((importedData) => {
         option.text(sampleId[i]);
     };
 
-    dropdownMenu.on("change", process);
+    dropdownMenu.on("change", buildCharts);
 
     var targetId = dropdownMenu.property('value');
     let idx = d3.select("#selDataset").node().value;
     console.log(idx);
 
+    function buildCharts(idx) {}
     d3.json("samples.json").then((data) => {
         var samples = data.samples;
         var resultArray = samples.filter(sampleObj => sampleObj.id == idx);
@@ -40,9 +41,15 @@ d3.json("samples.json").then((importedData) => {
         console.log(otuIds);
         console.log(otuLabels);
 
-         let trace1 = {
-            x: otuIds,
-            y: sampleValues,
+        // sampleValues = sampleValues.slice(0, 10);
+
+        // // Reverse the array due to Plotly's defaults
+        // sampleValues = sampleValues.reverse();
+
+
+        let trace1 = {
+            x: sampleValues,
+            y: otuIds,
             type: "bar",
             orientation: "h",
         };
@@ -55,42 +62,41 @@ d3.json("samples.json").then((importedData) => {
 
         Plotly.newPlot("bar", traces, layout);
 
+    let trace2 = {
+        x: otuIds,
+        y: sampleValues,
+        mode: 'markers',
+        marker: {
+            size: sampleValues,
+            color: otuIds
+        }
 
-    //pulling data for plots
+    }
+    let bubble = [trace2];
+
+    Plotly.newPlot("bubble", bubble)
+    });
 
 
     
 
-    // function buildCharts(idx) {
-    //     d3.json("samples.json").then((data) => {
-    //       var samples = data.samples;
-    //       var resultArray = samples.filter(sampleObj => sampleObj.id == idx);
-    //       var result = resultArray[0];
-    //       console.log(result);
-    //       var sampleValues = result.sample_values;
-    //       var otuIds = result.otu_ids;
-    //       var otuLabels = result.otu_labels;
-    //       console.log(sampleValues);
-    //       console.log(otuIds);
-    //       console.log(otuLabels);
+    });
 
-        });
-      
- 
-    
+
+
     // function buildCharts(idx) {
     //      d3.json("samples.json").then((data) => {
     //        var samples = data.samples;
     //        var resultArray = samples.filter(sampleObj => sampleObj.id == idx);
     //        var result = resultArray[0];
-       
+
     //        var otu_ids = result.otu_ids;
     //        var otu_labels = result.otu_labels;
     //        var sample_values = result.sample_values;  
-       
-           // Build bubble chart code here ...
-       });
-       
+
+    // Build bubble chart code here ...
+
+
 
     // let sample = data.map(row => row.samples);
     // console.log(sample);
@@ -142,7 +148,7 @@ d3.json("samples.json").then((importedData) => {
 
 
 
-   
+
 
 
 
