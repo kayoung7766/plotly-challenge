@@ -44,31 +44,23 @@ d3.json("samples.json").then((importedData) => {
         console.log(otuIds);
         console.log(otuLabels);
 
-        // function filterCities(city) {
-        //     return parseInt(city.Increase_from_2016) > 15000;
-        //   }
-          
-        //   // 2. Use filter() to pass the function as its argument
-        //   var filteredCities = top15Cities.filter(filterCities);
-          
-        //   //  Check to make sure your filtered your cities.
-        //   console.log(filteredCities);
-          
-        //   // 3. Use the map method with the arrow function to return all the filtered cities.
-        //   var cities = filteredCities.map(city => city.City);
-          
+        //IF TIME WITH TUTORING FIGURE OUT WHY THIS DIDN'T WORK
+        // var otuIdAxis = [];
+        // for (i = 0; i < otuIds.length; i++) {
+        //     var otuIdAxis = otuIdAxis.push(`OTU ${otuIds[i]}`);
+        // };
 
-        // sampleValues = sampleValues.sort();
-        // sampleValues = sampleValues.slice(0, 10);
-        // console.log(sampleValues)
+        // console.log(otuIdAxis);
 
-        // // // Reverse the array due to Plotly's defaults
-        // sampleValues = sampleValues.reverse();
+    
+        
 
 
         let trace1 = {
-            x: filteredValues,
-            y: otuIds,
+            x: filteredValues, //ok 
+            y:  [`OTU ${otuIds[0]}`, `OTU ${otuIds[1]}`, `OTU ${otuIds[2]}`,`OTU ${otuIds[3]}`, `OTU ${otuIds[4]}`,
+            `OTU ${otuIds[5]}`, `OTU ${otuIds[6]}`, `OTU ${otuIds[7]}`, `OTU ${otuIds[8]}`, `OTU ${otuIds[9]}`  ], //not ok
+            text: otuLabels,
             type: "bar",
             orientation: "h",
         };
@@ -83,7 +75,8 @@ d3.json("samples.json").then((importedData) => {
 
     let trace2 = {
         x: otuIds,
-        y: filteredValues,
+        y: sampleValues,
+        text: otuLabels,
         mode: 'markers',
         marker: {
             size: sampleValues,
@@ -93,7 +86,14 @@ d3.json("samples.json").then((importedData) => {
     }
     let bubble = [trace2];
 
-    Plotly.newPlot("bubble", bubble)
+    let layout2 = {
+        title: "Frequency of Microbial Species",
+        xaxis: {title: "OTU Id"
+        },
+            
+        };
+
+    Plotly.newPlot("bubble", bubble, layout2)
     });
 
 
