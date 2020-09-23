@@ -39,10 +39,25 @@ d3.json("samples.json").then((importedData) => {
         filteredValues = filteredValues.reverse();
         var otuIds = result.otu_ids;
         var otuLabels = result.otu_labels;
+        //metadata variables
+        var metadata = data.metadata;
+        var metaArray = metadata.filter(sampleObj => sampleObj.id == idx);
+        var metaResult = metaArray[0];
+        var ethnicity = metaResult.ethnicity;
+        var gender = metaResult.gender;
+        var age = metaResult.age;
+        var bbtype = metaResult.bbtype;
+        var wfreq = metaResult.wfreq;
+        var ethnicity = metaResult.ethnicity;
         console.log(sampleValues);
         console.log(filteredValues);
         console.log(otuIds);
         console.log(otuLabels);
+        console.log(ethnicity);
+        console.log(gender);
+        console.log(age);
+        console.log(bbtype);
+        console.log(wfreq);
 
         //IF TIME WITH TUTORING FIGURE OUT WHY THIS DIDN'T WORK
         // var otuIdAxis = [];
@@ -96,8 +111,23 @@ d3.json("samples.json").then((importedData) => {
     Plotly.newPlot("bubble", bubble, layout2)
     });
 
-
-    
+// metadata
+function buildTable(idx) {
+    // var panelBody = d3.select("#sample-metadata");
+    // var p;
+    // p = panelBody.append("p");
+    // var trow;
+    // for (var i = 0; i < 12; i++) {
+    //   trow = tbody.append("tr");
+    //   trow.append("td").text(dates[i]);
+    //   trow.append("td").text(openPrices[i]);
+    //   trow.append("td").text(highPrices[i]);
+    //   trow.append("td").text(lowPrices[i]);
+    //   trow.append("td").text(closingPrices[i]);
+    //   trow.append("td").text(volume[i]);
+    }
+  
+  
 
     });
 
