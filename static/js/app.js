@@ -35,20 +35,39 @@ d3.json("samples.json").then((importedData) => {
         var result = resultArray[0];
         console.log(result);
         var sampleValues = result.sample_values;
+        var filteredValues = sampleValues.slice(0,10);
+        filteredValues = filteredValues.reverse();
         var otuIds = result.otu_ids;
         var otuLabels = result.otu_labels;
         console.log(sampleValues);
+        console.log(filteredValues);
         console.log(otuIds);
         console.log(otuLabels);
 
-        // sampleValues = sampleValues.slice(0, 10);
+        // function filterCities(city) {
+        //     return parseInt(city.Increase_from_2016) > 15000;
+        //   }
+          
+        //   // 2. Use filter() to pass the function as its argument
+        //   var filteredCities = top15Cities.filter(filterCities);
+          
+        //   //  Check to make sure your filtered your cities.
+        //   console.log(filteredCities);
+          
+        //   // 3. Use the map method with the arrow function to return all the filtered cities.
+        //   var cities = filteredCities.map(city => city.City);
+          
 
-        // // Reverse the array due to Plotly's defaults
+        // sampleValues = sampleValues.sort();
+        // sampleValues = sampleValues.slice(0, 10);
+        // console.log(sampleValues)
+
+        // // // Reverse the array due to Plotly's defaults
         // sampleValues = sampleValues.reverse();
 
 
         let trace1 = {
-            x: sampleValues,
+            x: filteredValues,
             y: otuIds,
             type: "bar",
             orientation: "h",
@@ -64,7 +83,7 @@ d3.json("samples.json").then((importedData) => {
 
     let trace2 = {
         x: otuIds,
-        y: sampleValues,
+        y: filteredValues,
         mode: 'markers',
         marker: {
             size: sampleValues,
