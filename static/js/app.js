@@ -70,7 +70,7 @@ d3.json("samples.json").then((importedData) => {
     
         
 
-
+        //bar chart
         let trace1 = {
             x: filteredValues, //ok 
             y:  [`OTU ${otuIds[0]}`, `OTU ${otuIds[1]}`, `OTU ${otuIds[2]}`,`OTU ${otuIds[3]}`, `OTU ${otuIds[4]}`,
@@ -87,7 +87,7 @@ d3.json("samples.json").then((importedData) => {
         };
 
         Plotly.newPlot("bar", traces, layout);
-
+    // bubble chart
     let trace2 = {
         x: otuIds,
         y: sampleValues,
@@ -109,13 +109,31 @@ d3.json("samples.json").then((importedData) => {
         };
 
     Plotly.newPlot("bubble", bubble, layout2)
-    });
+   
 
+    console.log(wfreq);
+
+
+    //gauge chart (Bonus)
+    var gauge = [
+        {
+            domain: { x: [0, 9], y: [0, 9] },
+            value: wfreq,
+            title: { text: "Frequency of Washing: Scrubs Per Week" },
+            type: "indicator",
+            mode: "gauge+number"
+        }
+    ];
+    
+    var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    Plotly.newPlot('gauge', gauge, layout3);
+});
 // metadata
-function buildTable(idx) {
-    // var panelBody = d3.select("#sample-metadata");
-    // var p;
-    // p = panelBody.append("p");
+ 
+    // var panelBody = d3.select("#sample-metadata").append("tbody");
+    //  panelbody.selectAll("tr")
+    //  .append("tr")
+    //  .html( d => {`<td>${ethnicity}</td>`})
     // var trow;
     // for (var i = 0; i < 12; i++) {
     //   trow = tbody.append("tr");
@@ -125,9 +143,11 @@ function buildTable(idx) {
     //   trow.append("td").text(lowPrices[i]);
     //   trow.append("td").text(closingPrices[i]);
     //   trow.append("td").text(volume[i]);
-    }
+    
   
-  
+    //gague chart
+
+
 
     });
 
