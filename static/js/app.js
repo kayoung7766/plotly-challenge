@@ -121,8 +121,15 @@ d3.json("samples.json").then((importedData) => {
             value: wfreq,
             title: { text: "Frequency of Washing: Scrubs Per Week" },
             type: "indicator",
-            mode: "gauge+number"
+            mode: "gauge+number",
+            gauge : {axis: {'range': [0, 9]},
+            'steps' : [
+                {'range': [0, 3], 'color': '#F6B8B8'},
+                {'range': [3, 6], 'color': "#F5F6B8"},
+                {'range': [6, 9], 'color': "#B8F6C4"},],
         }
+
+        },
     ];
     
     var layout3 = { width: 600, height: 500, margin: { t: 0, b: 0 } };
