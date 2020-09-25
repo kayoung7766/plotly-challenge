@@ -95,7 +95,8 @@ d3.json("samples.json").then((importedData) => {
             mode: 'markers',
             marker: {
                 size: sampleValues,
-                color: otuIds
+                color: otuIds,
+                colorscale: "Earth",
             }
 
         }
@@ -153,3 +154,4 @@ d3.json("samples.json").then((importedData) => {
     });
 
 });
+
